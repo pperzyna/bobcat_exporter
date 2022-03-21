@@ -194,7 +194,7 @@ func (e *Exporter) scrape(ch chan<- prometheus.Metric) (up float64) {
 	ch <- prometheus.MustNewConstMetric(e.bobcatStatus.Desc(), prometheus.GaugeValue, parseStatus(status.Status))
 	ch <- prometheus.MustNewConstMetric(e.bobcatStatusGap.Desc(), prometheus.GaugeValue, parseString(status.Gap))
 	ch <- prometheus.MustNewConstMetric(e.bobcatStatusMinerHeight.Desc(), prometheus.GaugeValue, parseString(status.MinerHeight))
-	ch <- prometheus.MustNewConstMetric(e.bobcatStatusBlockchainHeight.Desc(), prometheus.GaugeValue, parseString(status.MinerHeight))
+	ch <- prometheus.MustNewConstMetric(e.bobcatStatusBlockchainHeight.Desc(), prometheus.GaugeValue, parseString(status.BlockchainHeight))
 	ch <- prometheus.MustNewConstMetric(e.bobcatStatusEpoch.Desc(), prometheus.GaugeValue, parseString(status.Epoch))
 
 	// ENDPOINT: /temp.json
@@ -237,7 +237,7 @@ func parseTemperature(str string) (float64) {
 }
 
 func parseStatus(str string) (float64) {
-	if(str == "synced") {
+	if(str == "Synced") {
 		return 1;
 	}
 	return 0
